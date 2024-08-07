@@ -30,7 +30,6 @@
           <h5>Quick Links</h5>
           <ul class="nav flex-column">
             <li class="nav-item mb-2">
-              <!-- <a class="nav-link p-0 text-light">About</a> -->
               <a class="nav-link p-0 text-light cursor-pointer"
                  (click)="navigate(['/about'])"
                  [class.active]="isRouterLinkActive('/home')">About</a>
@@ -40,7 +39,11 @@
                  (click)="navigate(['/stall-schedules'])"
                  [class.active]="isRouterLinkActive('/stall-schedules')">Pop-up</a>
             </li>
-            <li class="nav-item mb-2"><a class="nav-link p-0 text-light">Customization</a></li>
+            <li class="nav-item mb-2">
+              <a class="nav-link p-0 text-light cursor-pointer"
+                 (click)="navigate(['/customization'])"
+                 [class.active]="isRouterLinkActive('/customization')">Customization</a>
+            </li>
             <li class="nav-item mb-2">
               <a class="nav-link p-0 text-light cursor-pointer"
                  (click)="navigate(['/faqs'])"
