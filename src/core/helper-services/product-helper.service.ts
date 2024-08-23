@@ -12,6 +12,9 @@ import {
   ProductImageInterface,
   ProductInterface
 } from '../interfaces';
+import {
+  ProductImageStorageLocation
+} from '../enums';
 
 @Injectable()
 export class ProductHelperService {
@@ -31,7 +34,9 @@ export class ProductHelperService {
   public transformProductImages(productImages: Array<ProductImageInterface>): Array<ProductImageModel> {
     return productImages.map(data => {
       const img = new ProductImageModel(data);
-      img.url = this.BASE_URL + img.url;
+      if (!img.storageLocation || (img.storageLocation === ProductImageStorageLocation.LOCAL)) {
+        img.url = this.BASE_URL + img.url;
+      }
       return img;
     });
   }
