@@ -179,6 +179,27 @@ export class ProductsBrokerService {
       .subscribe();
   }
 
+  public deleteProduct(productId: string): void {
+    this._loadingHelper.startLoading();
+    this._productsData.deleteProduct(productId)
+      .pipe(
+        take(1),
+        tap(res => {
+          this._productLoader.isProductDeleted = true;
+          this._notificationHelper.handleSuccess('Product deleted!');
+        }),
+        catchError((err: HttpErrorResponse) => {
+          this._productLoader.isProductDeleted = false;
+          this._notificationHelper.handleError(err.error.message);
+          return of();
+        }),
+        finalize(() => {
+          this._loadingHelper.stopLoading();
+        })
+      )
+      .subscribe();
+  }
+
   public rearrangeProductImages(productId: string, imageIds: Array<string>): void {
     this._loadingHelper.startLoading();
     let product: ProductModel = new ProductModel();

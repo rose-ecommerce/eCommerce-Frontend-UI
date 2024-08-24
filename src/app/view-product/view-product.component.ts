@@ -42,6 +42,9 @@ export class ViewProductComponent implements OnInit, OnDestroy {
   public get canEditProduct(): boolean {
     return this._authHelper.isLoggedIn && this._authHelper.isLoggedInUserAdminOrMod;
   }
+  public get canDeleteProduct(): boolean {
+    return this._authHelper.isLoggedIn && this._authHelper.isLoggedInUserAdmin;
+  }
   public get isDiscountAvailable(): boolean {
     return this.product.maxRetailPrice > this.product.sellingPrice;
   }
@@ -120,6 +123,16 @@ export class ViewProductComponent implements OnInit, OnDestroy {
         this.product = product;
         this._createCustomTextForm();
       });
+
+    this._productLoader.isProductDeleted$
+      .pipe(takeWhile(() => this._subscribeMain))
+      .subscribe(isDeleted => {
+        if (isDeleted) {
+          this._router.navigate(['../'], {
+            relativeTo: this._route
+          });
+        }
+      });
   }
 
   public setAsDisplayImage(image: ProductImageModel): void {
@@ -159,6 +172,12 @@ export class ViewProductComponent implements OnInit, OnDestroy {
     this._router.navigate(['edit'], {
       relativeTo: this._route,
     })
+  }
+
+  public deleteProduct(): void {
+    if (confirm('Are you sure you want to delete this product? Once deleted it cannot be retrieved!')) {
+      this._productsBroker.deleteProduct(this.product._id);
+    }
   }
 
   public openCarousel(): void {

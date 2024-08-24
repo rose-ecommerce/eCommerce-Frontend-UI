@@ -45,6 +45,10 @@ export class ProductLoaderService {
 
   private _products$: Subject<Array<ProductModel>> = new Subject();
   public products$: Observable<Array<ProductModel>> = this._products$.asObservable();
+
+  private _isProductDeleted$: Subject<boolean> = new Subject();
+  public isProductDeleted$: Observable<boolean> = this._isProductDeleted$.asObservable();
+
   constructor() { }
 
   public set pagination(data: PaginationModel<ProductModel>) {
@@ -65,6 +69,10 @@ export class ProductLoaderService {
 
   public set product(data: ProductModel) {
     this._product$.next(data);
+  }
+
+  public set isProductDeleted(data: boolean) {
+    this._isProductDeleted$.next(data);
   }
 
   public set products(data: Array<ProductModel>) {

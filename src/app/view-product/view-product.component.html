@@ -105,6 +105,12 @@
                   (click)="editProduct()">
             <i class="fa-solid fa-pen-to-square"></i>
           </button>
+
+          <button class="btn btn-link px-2 mx-2 delete-product"
+                  *ngIf="canDeleteProduct"
+                  (click)="deleteProduct()">
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
         </div>
       </div>
     </div>

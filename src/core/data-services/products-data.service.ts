@@ -66,6 +66,12 @@ export class ProductsDataService {
     );
   }
 
+  public deleteProduct(productId: string): Observable<ApiResponseInterface<ProductInterface>> {
+    return this._http.delete<ApiResponseInterface<ProductInterface>>(
+      this.API_URL + `/products/${productId}`,
+    );
+  }
+
   public reaggangeProductImages(productId: string, imageIds: Array<string>): Observable<ApiResponseInterface<ProductInterface>> {
     return this._http.put<ApiResponseInterface<ProductInterface>>(
       this.API_URL + `/products/${productId}/images`,
