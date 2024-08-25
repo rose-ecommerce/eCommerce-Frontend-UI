@@ -175,8 +175,13 @@ export class ViewProductComponent implements OnInit, OnDestroy {
   }
 
   public deleteProduct(): void {
-    if (confirm('Are you sure you want to delete this product? Once deleted it cannot be retrieved!')) {
-      this._productsBroker.deleteProduct(this.product._id);
+    if (confirm('Are you sure you want to delete this product? Please check whether the product is placed for the order. Once the product is deleted, it cannot be retrieved!')) {
+      const result = prompt(`To confirm, type "${this.product.name}" in the box below`);
+      if (result === this.product.name) {
+        this._productsBroker.deleteProduct(this.product._id);
+      } else {
+        alert(`Input incorrect, please try again.`);
+      }
     }
   }
 

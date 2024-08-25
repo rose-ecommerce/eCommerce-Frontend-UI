@@ -81,7 +81,7 @@
         <div class="d-flex my-4">
           <ng-container *ngIf="!isProductOutOfStock; else outOfStock">
             <ng-container *ngIf="productQtyInCart < 1; else qtyController">
-              <button class="btn btn-outline-primary"
+              <button class="btn btn-outline-primary mx-2"
                       [disabled]="!isProductAddable"
                       (click)="addProduct(1)">
                   Add to Cart
@@ -95,7 +95,7 @@
             </ng-template>
           </ng-container>
           <ng-template #outOfStock>
-            <button class="btn btn-outline-warning disabled">
+            <button class="btn btn-outline-warning mx-2 disabled">
                 Out of Stock
             </button>
           </ng-template>
@@ -106,11 +106,11 @@
             <i class="fa-solid fa-pen-to-square"></i>
           </button>
 
-          <button class="btn btn-link px-2 mx-2 delete-product"
-                  *ngIf="canDeleteProduct"
-                  (click)="deleteProduct()">
+          <span class="text-danger p-2 mx-2 cursor-pointer delete-product"
+                *ngIf="canDeleteProduct"
+                (click)="deleteProduct()">
             <i class="fa-solid fa-trash-can"></i>
-          </button>
+          </span>
         </div>
       </div>
     </div>
