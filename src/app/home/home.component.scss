@@ -1,14 +1,14 @@
 .banner {
-  height: 40em;
-  background-image: url('/assets/images/home-banner-01.jpg');
-  background-repeat: no-repeat;
-  background-attachment: scroll;
-  background-position: center;
-  background-size: cover;
-
   h1 {
     font-size: 4em !important;
     font-family: "Great Vibes", cursive;
+  }
+  .banner-img {
+    height: 40em;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center;
+    background-size: cover;
   }
 }
 

@@ -36,7 +36,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   public pinnedPagination: PaginationModel<ProductModel> = new PaginationModel();
   public latestPagination: PaginationModel<ProductModel> = new PaginationModel();
   public popularPagination: PaginationModel<ProductModel> = new PaginationModel();
-  private readonly DEFAULT_PAGE_SIZE = 3;
+  private readonly DEFAULT_PAGE_SIZE: number = 3;
+  private readonly BANNER_SWITCH_TIMEOUT: number = 4000;
   private _pinnedPaginationFilter: ProductFilterCriteriaModel = new ProductFilterCriteriaModel({
     page: DEFAULT_PAGE_INDEX,
     size: this.DEFAULT_PAGE_SIZE,
@@ -56,6 +57,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
   public readonly JEWELLERY_CARE_DATA: readonly JewelleryCareInterface[] = JEWELLERY_CARE;
   private _subscribeMain: boolean = true;
+  public readonly bannerImages: readonly string[] = [
+    '/assets/images/home/banner-01.jpg',
+    '/assets/images/home/banner-02.jpg',
+    '/assets/images/home/banner-03.jpg',
+    '/assets/images/home/banner-04.jpg',
+  ];
+  public currentBannerImage: string = this.bannerImages[0];
+  private _bannerSwitchIntervalId!: any;
   @ViewChild('shopByCategory') private _shopByCategory!: ElementRef;
 
 
@@ -65,6 +74,7 @@ export class HomeComponent implements OnInit, OnDestroy {
               private _router: Router) {}
 
   ngOnInit(): void {
+    this._initBannerSwitchInterval();
     this._initSubscriptions();
     this._productsBroker.getInitialDataRequiredForHomePage(
       this._pinnedPaginationFilter,
@@ -75,6 +85,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this._subscribeMain = false;
+    clearInterval(this._bannerSwitchIntervalId);
   }
 
 
@@ -96,6 +107,12 @@ export class HomeComponent implements OnInit, OnDestroy {
       .subscribe(pagination => {
         this.popularPagination = pagination;
       });
+  }
+
+  private _initBannerSwitchInterval(): void {
+    this._bannerSwitchIntervalId = setInterval(() => {
+      this.nextBannerImg();
+    }, this.BANNER_SWITCH_TIMEOUT);
   }
 
   public switchPage(pageIndex: number, paginationType: ProductPaginationType): void {
@@ -160,5 +177,27 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public scrollToCategory(): void {
     this._shopByCategory?.nativeElement.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  public setBannerImg(idx: number): void {
+    this.currentBannerImage = this.bannerImages[idx];
+  }
+
+  public previousBannerImg(): void {
+    const idxOfCurrentBannerImg: number = this.bannerImages.indexOf(this.currentBannerImage);
+    if (idxOfCurrentBannerImg > 0) {
+      this.currentBannerImage = this.bannerImages[idxOfCurrentBannerImg - 1];
+    } else {
+      this.currentBannerImage = this.bannerImages[this.bannerImages.length - 1];
+    }
+  }
+
+  public nextBannerImg(): void {
+    const idxOfCurrentBannerImg: number = this.bannerImages.indexOf(this.currentBannerImage);
+    if (idxOfCurrentBannerImg < (this.bannerImages.length - 1)) {
+      this.currentBannerImage = this.bannerImages[idxOfCurrentBannerImg + 1];
+    } else {
+      this.currentBannerImage = this.bannerImages[0];
+    }
   }
 }

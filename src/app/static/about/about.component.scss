@@ -1,0 +1,11 @@
+.main-img {
+  $width: 25em;
+  width: $width;
+  height: calc($width * 1.4);
+  overflow: hidden;
+  background-image: url('/assets/images/about-main.jpg');
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center;
+  background-size: cover;
+}

@@ -1,8 +1,37 @@
 <!-- Banner -->
-<div class="d-flex flex-column align-items-center justify-content-center banner">
-  <h1 class="text-white fs-3 fw-bolder">Style For Move</h1>
-  <button class="btn btn-primary"
-          (click)="scrollToCategory()">Shop now</button>
+<div class="carousel slide position-relative banner">
+  <div class="z-1 position-absolute top-50 start-50 translate-middle d-flex flex-column align-items-center justify-content-center">
+    <h1 class="text-white fs-3 fw-bolder">Style For Move</h1>
+    <button class="btn btn-primary"
+            (click)="scrollToCategory()">Shop now</button>
+  </div>
+  <div class="carousel-indicators">
+    <button *ngFor="let img of bannerImages; let idx = index;"
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            [class.active]="currentBannerImage === img"
+            (click)="setBannerImg(idx)">
+    </button>
+  </div>
+  <div class="carousel-inner">
+    <div *ngFor="let img of bannerImages; let idx = index;"
+         class="carousel-item banner-img"
+         [class.active]="currentBannerImage === img"
+         [style.backgroundImage]="img | backgroundImage">
+    </div>
+  </div>
+  <button class="carousel-control-prev"
+          type="button"
+          (click)="previousBannerImg()">
+    <span class="carousel-control-prev-icon"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next"
+          type="button"
+          (click)="nextBannerImg()">
+    <span class="carousel-control-next-icon"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
 </div>
 
 <div class="container">

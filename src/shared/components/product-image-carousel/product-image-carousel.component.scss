@@ -9,11 +9,18 @@
 }
 
 .carousel-img {
-  height: 52em;
+  height: 85vh;
   width: 52em;
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center;
   background-size: contain;
-  background-color: whitesmoke;
+  background-color: black;
+}
+
+@media (max-width: 767px) {
+  .carousel-img {
+    height: 70vh;
+    width: 100vw;
+  }
 }
