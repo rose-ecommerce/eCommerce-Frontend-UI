@@ -24,7 +24,8 @@ import {
   ProductHelperService,
   RazorpayHelperService,
   StallScheduleHelperService,
-  UserHelperService
+  UserHelperService,
+  ScreenResizeHelperService
 } from './helper-services';
 import {
   AdminGuard,
@@ -77,6 +78,7 @@ import {
     CartHelperService,
     RazorpayHelperService,
     StallScheduleHelperService,
+    ScreenResizeHelperService,
 
     AuthGuard,
     AdminGuard,

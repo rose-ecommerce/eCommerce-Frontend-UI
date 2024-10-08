@@ -3,6 +3,7 @@
        [style.backgroundImage]="('/assets/images/categories/category-' + categoryName + '.jpg') | backgroundImage"
        (click)="onClickCard()"></div>
   <button class="btn btn-primary position-absolute top-50 start-50 translate-middle"
+          [class.btn-sm]="isSmallScreenReached"
           (click)="onClickCard()">
       {{ categoryName | capitalize:'_' }}
   </button>

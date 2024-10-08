@@ -7,3 +7,4 @@ export * from './product-helper.service';
 export * from './order-helper.service';
 export * from './user-helper.service';
 export * from './stall-schedule-helper.service';
+export * from './screen-resize-helper.service';

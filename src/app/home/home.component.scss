@@ -12,10 +12,29 @@
   }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 786px) {
   .banner {
     h1 {
       font-size: 3em !important;
+    }
+  }
+}
+
+@media (max-width: 590px) {
+  .banner {
+    h1 {
+      font-size: 2.5em !important;
+    }
+    .banner-img {
+      height: 25em;
+    }
+  }
+}
+
+@media (max-width: 491px) {
+  .banner {
+    h1 {
+      font-size: 1.9em !important;
     }
   }
 }

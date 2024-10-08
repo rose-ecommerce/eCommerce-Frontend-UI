@@ -3,6 +3,7 @@
   <div class="z-1 position-absolute top-50 start-50 translate-middle d-flex flex-column align-items-center justify-content-center">
     <h1 class="text-white fs-3 fw-bolder">Style For Move</h1>
     <button class="btn btn-primary"
+            [class.btn-sm]="isSmallScreenReached"
             (click)="scrollToCategory()">Shop now</button>
   </div>
   <div class="carousel-indicators">

@@ -24,6 +24,7 @@ import {
   PRODUCT_SORTABLE_COLUMN,
   JewelleryCareInterface,
   JEWELLERY_CARE,
+  ScreenResizeHelperService,
 } from 'src/core';
 
 @Component({
@@ -65,12 +66,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   ];
   public currentBannerImage: string = this.bannerImages[0];
   private _bannerSwitchIntervalId!: any;
+  public isSmallScreenReached: boolean = false;
   @ViewChild('shopByCategory') private _shopByCategory!: ElementRef;
 
 
   constructor(private _productsBroker: ProductsBrokerService,
               private _productLoader: ProductLoaderService,
               private _cartHelper: CartHelperService,
+              private _screenResizeHelper: ScreenResizeHelperService,
               private _router: Router) {}
 
   ngOnInit(): void {
@@ -106,6 +109,12 @@ export class HomeComponent implements OnInit, OnDestroy {
       .pipe(takeWhile(() => this._subscribeMain))
       .subscribe(pagination => {
         this.popularPagination = pagination;
+      });
+
+    this._screenResizeHelper.screenWidth$
+      .pipe(takeWhile(() => this._subscribeMain))
+      .subscribe(width => {
+        this.isSmallScreenReached = (width <= 491);
       });
   }
 
