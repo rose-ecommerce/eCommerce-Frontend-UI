@@ -18,7 +18,8 @@ import {
   ProductImageModel,
   ProductLoaderService,
   ProductModel,
-  ProductsBrokerService
+  ProductsBrokerService,
+  ScreenResizeHelperService
 } from 'src/core';
 
 @Component({
@@ -80,11 +81,15 @@ export class ViewProductComponent implements OnInit, OnDestroy {
            this.customizationTextFC.valid &&
            (this.customizationTextFC?.value !== this.customizationTextOfProductInCart);
   }
+  public primaryImageHeight!: string;
+  public secondaryImageHeight!: string;
+
   constructor(private _route: ActivatedRoute,
               private _productsBroker: ProductsBrokerService,
               private _productLoader: ProductLoaderService,
               private _cartHelper: CartHelperService,
               private _authHelper: AuthHelperService,
+              private _screenResizeHelper: ScreenResizeHelperService,
               private _router: Router) {}
 
   ngOnInit(): void {
@@ -131,6 +136,34 @@ export class ViewProductComponent implements OnInit, OnDestroy {
           this._router.navigate(['../'], {
             relativeTo: this._route
           });
+        }
+      });
+
+    this._screenResizeHelper.screenWidth$
+      .pipe(takeWhile(() => this._subscribeMain))
+      .subscribe(width => {
+        /*
+         * 512 is the width of the primary image & 24 is its left and right padding.
+         * 
+         */
+        if (width <= 560) {
+          this.primaryImageHeight = `${width - (2 * 24)}px`;
+          const numberOfImagesOfProduct: number = this.product.images.length;
+          switch(numberOfImagesOfProduct) {
+            case 3:
+              this.secondaryImageHeight = `${(width - (2 * 24) - (2 * 16)) / numberOfImagesOfProduct}px`
+              break;
+            case 2:
+              if (width <= 384) {
+                this.secondaryImageHeight = `${(width - (2 * 24) - 16) / numberOfImagesOfProduct}px`
+              } else {
+                this.secondaryImageHeight = '160px';
+              }
+              break;
+          }
+        } else {
+          this.primaryImageHeight = '512px';
+          this.secondaryImageHeight = '160px';
         }
       });
   }

@@ -13,10 +13,12 @@
         <div class="d-flex flex-column-reverse flex-xl-row">
           <div class="d-flex flex-row flex-xl-column me-xl-3 mt-3 mt-xl-0">
             <!-- Secondary Images -->
-            <div class="img-fluid border border-2 mb-3 me-3 me-xl-0 cursor-pointer secondary-img"
+            <div class="img-fluid border border-2 mb-3 me-xl-0 cursor-pointer secondary-img"
                  *ngFor="let image of product.images; let i = index;"
-                 [style.backgroundImage]="image.url | backgroundImage"
                  (click)="setAsDisplayImage(image)"
+                 [style.backgroundImage]="image.url | backgroundImage"
+                 [style.height]="secondaryImageHeight"
+                 [class.me-3]="(i + 1) < product.images.length"
                  [class.border-info]="isImageDisplayed(image)">
             </div>
           </div>
@@ -24,6 +26,7 @@
           <!-- Primary Image -->
           <div class="img-fluid border border-2 border-info primary-img"
                (click)="openCarousel()"
+               [style.height]="primaryImageHeight"
                [style.backgroundImage]="product.displayImage.url | backgroundImage"></div>
         </div>
       </div>

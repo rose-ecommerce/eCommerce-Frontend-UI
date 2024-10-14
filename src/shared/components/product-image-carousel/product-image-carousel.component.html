@@ -8,6 +8,7 @@
     <div class="carousel-inner">
       <div *ngFor="let image of carouselImages; let i = index;"
            class="img-fluid carousel-item carousel-img"
+           [style.height]="carouselImageHeight"
            [style.backgroundImage]="image.url | backgroundImage"
            [class.active]="isImageDisplayed(image)">
       </div>
