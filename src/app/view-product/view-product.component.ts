@@ -9,6 +9,7 @@ import {
   Router
 } from '@angular/router';
 import {
+  mergeMap,
   takeWhile
 } from 'rxjs';
 import {
@@ -123,29 +124,15 @@ export class ViewProductComponent implements OnInit, OnDestroy {
       });
 
     this._productLoader.product$
-      .pipe(takeWhile(() => this._subscribeMain))
-      .subscribe(product => {
-        this.product = product;
-        this._createCustomTextForm();
-      });
-
-    this._productLoader.isProductDeleted$
-      .pipe(takeWhile(() => this._subscribeMain))
-      .subscribe(isDeleted => {
-        if (isDeleted) {
-          this._router.navigate(['../'], {
-            relativeTo: this._route
-          });
-        }
-      });
-
-    this._screenResizeHelper.screenWidth$
-      .pipe(takeWhile(() => this._subscribeMain))
+      .pipe(
+        takeWhile(() => this._subscribeMain),
+        mergeMap(product => {
+          this.product = product;
+          this._createCustomTextForm();
+          return this._screenResizeHelper.screenWidth$;
+        })
+      )
       .subscribe(width => {
-        /*
-         * 512 is the width of the primary image & 24 is its left and right padding.
-         * 
-         */
         if (width <= 560) {
           this.primaryImageHeight = `${width - (2 * 24)}px`;
           const numberOfImagesOfProduct: number = this.product.images.length;
@@ -164,6 +151,16 @@ export class ViewProductComponent implements OnInit, OnDestroy {
         } else {
           this.primaryImageHeight = '512px';
           this.secondaryImageHeight = '160px';
+        }
+      });
+
+    this._productLoader.isProductDeleted$
+      .pipe(takeWhile(() => this._subscribeMain))
+      .subscribe(isDeleted => {
+        if (isDeleted) {
+          this._router.navigate(['../'], {
+            relativeTo: this._route
+          });
         }
       });
   }
