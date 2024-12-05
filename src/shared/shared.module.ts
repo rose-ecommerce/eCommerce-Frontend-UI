@@ -61,7 +61,8 @@ import {
   CapitalizePipe,
   YesOrNoPipe,
   InrPipe,
-  TruncatePipe
+  TruncatePipe,
+  FormatPipe
 } from './pipes';
 
 
@@ -89,6 +90,7 @@ import {
     YesOrNoPipe,
     InrPipe,
     TruncatePipe,
+    FormatPipe,
   ],
   imports: [
     CommonModule,
@@ -117,6 +119,7 @@ import {
     YesOrNoPipe,
     InrPipe,
     TruncatePipe,
+    FormatPipe
   ]
 })
 export class SharedModule { }

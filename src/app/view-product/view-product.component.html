@@ -7,7 +7,7 @@
 <div class="container px-4 px-lg-5 my-5">
   <!-- Product section-->
   <section class="py-5">
-    <div class="row gx-4 gx-lg-5 align-items-center">
+    <div class="row gx-4 gx-lg-5 align-items-top">
       <div class="col-xl-7">
 
         <div class="d-flex flex-column-reverse flex-xl-row">
@@ -47,8 +47,8 @@
             {{ discountPercentage }}
           </small>
         </div>
-        <p class="lead">
-            {{ product.description }}
+        <p class="lead"
+           [innerHTML]="product.description | format">
         </p>
         
         
@@ -70,7 +70,8 @@
           <small class="text-danger"
                   *ngIf="customizationTextFC.errors?.['required']">Custom text is required</small>
           <small class="text-danger"
-                  *ngIf="customizationTextFC.errors?.['pattern']">A-Z & 0-9 are only allowed</small>
+                  *ngIf="customizationTextFC.errors?.['pattern']">
+            <strong>A-Z</strong>, <strong>a-z</strong> and <strong>0-9</strong> are only allowed characters. Separate text via <strong>&</strong> character, if the product comes in a pair.</small>
           <small class="text-danger"
                   *ngIf="customizationTextFC.errors?.['minlength']">
             Minimum length is {{ product.customizationTextRange.min }}
