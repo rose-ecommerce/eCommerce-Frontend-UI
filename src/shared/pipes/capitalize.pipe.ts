@@ -16,6 +16,12 @@ export class CapitalizePipe implements PipeTransform {
       return value
         .split(separator)
         .map(word => {
+          if (word === 'AND') {
+            return '&'
+          }
+          return word;
+        })
+        .map(word => {
           return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
         })
         .join(' ')
