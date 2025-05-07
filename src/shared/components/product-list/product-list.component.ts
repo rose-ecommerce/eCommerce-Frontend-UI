@@ -9,6 +9,7 @@ import { PaginationModel, ProductModel } from 'src/core';
 export class ProductListComponent {
   @Input() paginator: PaginationModel<ProductModel> = new PaginationModel();
   @Input() pageLimit: number | undefined = undefined;
+  @Input() scrollToTop: boolean = false;
   @Output() page: EventEmitter<number> = new EventEmitter();
   @Output() addToCart: EventEmitter<ProductModel> = new EventEmitter();
 

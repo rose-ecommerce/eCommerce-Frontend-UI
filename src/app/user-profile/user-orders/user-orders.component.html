@@ -33,6 +33,7 @@
         </tbody>
       </table>
       <app-pagination-controller [paginator]="pagination"
+                                 [scrollToTop]="true"
                                  (page)="switchPage($event)">
       </app-pagination-controller>
     </div>

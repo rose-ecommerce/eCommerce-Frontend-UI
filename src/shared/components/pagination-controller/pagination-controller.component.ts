@@ -1,5 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { PaginationModel } from 'src/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output
+} from '@angular/core';
+import {
+  PaginationModel
+} from 'src/core';
 
 @Component({
   selector: 'app-pagination-controller',
@@ -9,6 +17,7 @@ import { PaginationModel } from 'src/core';
 export class PaginationControllerComponent implements OnInit {
   @Input() paginator: PaginationModel<any> = new PaginationModel();
   @Input() pageLimit: number | undefined = undefined;
+  @Input() scrollToTop: boolean = false;
   @Output() page: EventEmitter<number> = new EventEmitter();
   private get _totalPages(): number {
     if (this.pageLimit &&
@@ -64,6 +73,9 @@ export class PaginationControllerComponent implements OnInit {
   }
 
   private _goToPage(pageIndex: number): void {
+    if (this.scrollToTop) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
     this.page.emit(pageIndex);
   }
 }

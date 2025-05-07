@@ -47,6 +47,8 @@ export class SignupComponent implements OnInit, OnDestroy {
   public postalCodeFormControl!: FormControl;
   public countries: Array<string> = [];
   public states: Array<string> = [];
+  public showPassword: boolean = false;
+  public showConfirmPassword: boolean = false; 
   private _subscribeMain: boolean = true;
   constructor(private _authBroker: AuthBrokerService,
               private _authLoader: AuthLoaderService,

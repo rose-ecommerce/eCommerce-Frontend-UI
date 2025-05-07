@@ -30,11 +30,20 @@
               <!-- Password -->
               <div class="form-group my-3">
                 <label for="password">Password:</label>
-                <input type="password"
-                       id="password"
-                       class="form-control"
-                       [ngClass]="getInputValidationClasses('password')"
-                       [formControl]="passwordFormControl">
+                <div class="input-group">
+                  <input [type]="showPassword ? 'text' : 'password'"
+                         id="password"
+                         class="form-control"
+                         [ngClass]="getInputValidationClasses('password')"
+                         [formControl]="passwordFormControl">
+                  <button type="button"
+                          class="btn btn-outline-primary"
+                          (click)="showPassword = !showPassword;">
+                    <i class="bi cursor-pointer"
+                       [ngClass]="showPassword ? 'bi-eye-slash-fill' : 'bi-eye-fill'"></i>
+                  </button>
+                </div>
+                
                 <ng-container *ngIf="isInputValid('password')">
                   <small class="text-danger"
                          *ngIf="passwordFormControl.errors?.['required']">Password is required</small>

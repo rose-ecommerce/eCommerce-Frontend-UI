@@ -32,6 +32,7 @@ export class SigninComponent implements OnInit, OnDestroy {
   public signinFormGroup!: FormGroup;
   public emailFormControl!: FormControl;
   public passwordFormControl!: FormControl;
+  public showPassword: boolean = false;
   private _subscribeMain: boolean = true;
 
   constructor(private _router: Router,

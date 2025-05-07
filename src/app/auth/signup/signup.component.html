@@ -37,11 +37,19 @@
                 <!-- Password -->
                 <div class="col-12 form-group">
                   <label for="password" class="form-label">Password</label>
-                  <input type="password"
-                         class="form-control"
-                         id="password"
-                         [ngClass]="getInputValidationClasses('password')"
-                         [formControl]="passwordFormControl">
+                  <div class="input-group">
+                    <input [type]="showPassword ? 'text' : 'password'"
+                           class="form-control"
+                           id="password"
+                           [ngClass]="getInputValidationClasses('password')"
+                           [formControl]="passwordFormControl">
+                    <button type="button"
+                            class="btn btn-outline-primary"
+                            (click)="showPassword = !showPassword;">
+                      <i class="bi cursor-pointer"
+                          [ngClass]="showPassword ? 'bi-eye-slash-fill' : 'bi-eye-fill'"></i>
+                    </button>
+                  </div>
                   <ng-container *ngIf="isInputValid('password')">
                   <small class="text-danger"
                          *ngIf="passwordFormControl.errors?.['required']">
@@ -53,11 +61,19 @@
                 <!-- Confirm password -->
                 <div class="col-12 form-group">
                   <label for="confirm-password" class="form-label">Confirm Password</label>
-                  <input type="password"
-                         class="form-control"
-                         id="confirm-password"
-                         [ngClass]="getInputValidationClasses('confirmPassword')"
-                         [formControl]="confirmPasswordFormControl">
+                  <div class="input-group">
+                    <input [type]="showConfirmPassword ? 'text' : 'password'"
+                           class="form-control"
+                           id="confirm-password"
+                           [ngClass]="getInputValidationClasses('confirmPassword')"
+                           [formControl]="confirmPasswordFormControl">
+                    <button type="button"
+                            class="btn btn-outline-primary"
+                            (click)="showConfirmPassword = !showConfirmPassword;">
+                     <i class="bi cursor-pointer"
+                        [ngClass]="showConfirmPassword ? 'bi-eye-slash-fill' : 'bi-eye-fill'"></i>
+                    </button>
+                  </div>
                   <ng-container *ngIf="isInputValid('confirmPassword')">
                     <small class="text-danger"
                            *ngIf="confirmPasswordFormControl.errors?.['mismatch']">

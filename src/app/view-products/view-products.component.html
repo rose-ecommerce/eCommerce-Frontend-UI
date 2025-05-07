@@ -3,7 +3,8 @@
     <h2>{{ header }}</h2>
     <app-product-list [paginator]="pagination"
                       (page)="switchPage($event)"
-                      (addToCart)="addProductToCart($event)">
+                      (addToCart)="addProductToCart($event)"
+                      [scrollToTop]="true">
     </app-product-list>
   </section>
 </div>
