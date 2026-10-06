@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+
+# Private / transactional pages - no SEO value
+Disallow: /auth
+Disallow: /cart
+Disallow: /orders
+Disallow: /my-profile
+Disallow: /manage-mods
+Disallow: /stall-schedules
+Disallow: /payment-processing
+Disallow: /not-found
+Disallow: /products/create
+Disallow: /products/*/edit
+
+Sitemap: https://www.styleitbyrose.in/sitemap.xml
